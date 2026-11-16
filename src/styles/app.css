@@ -1,0 +1,10 @@
+.app-canvas {
+  background-image:
+    radial-gradient(ellipse 70% 45% at 0% -10%, color-mix(in oklch, var(--gold) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 0%, color-mix(in oklch, var(--primary) 12%, transparent), transparent 50%);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-optical-sizing: auto;
+}

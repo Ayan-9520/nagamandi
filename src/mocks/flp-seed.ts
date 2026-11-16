@@ -1,0 +1,153 @@
+import { toUnits } from '@/services/flp-rules'
+import type { FlpData } from '@/types/flp'
+
+const DAY = '2026-11-14T08:00:00+05:30'
+
+export function createFlpSeed(): FlpData {
+  return {
+    units: [
+      { id: 'DEMO-FLP-10101', code: 'FLP-D1', name: 'Dimapur chilli line', mandiId: 'mandi-dimapur', capacityUnits: toUnits(50) },
+      { id: 'DEMO-FLP-10102', code: 'FLP-D2', name: 'Dimapur ginger line', mandiId: 'mandi-dimapur', capacityUnits: toUnits(30) },
+      { id: 'DEMO-FLP-10103', code: 'FLP-D3', name: 'Dimapur packing room', mandiId: 'mandi-dimapur', capacityUnits: toUnits(20) },
+    ],
+    batches: [
+      {
+        id: 'DEMO-FLB-10101',
+        batchNo: 'DEMO-FLB-10101',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        lotId: 'DEMO-LOT-5101',
+        lotNo: 'DEMO-LOT-5101',
+        sellerId: 'DEMO-REG-FS-1001',
+        sellerLabel: 'DG-14',
+        commodityName: 'Naga king chilli',
+        gradeName: 'A',
+        intakeUnits: toUnits(4),
+        note: 'Sample intake. Not a process certificate.',
+        at: DAY,
+      },
+      {
+        id: 'DEMO-FLB-10102',
+        batchNo: 'DEMO-FLB-10102',
+        unitId: 'DEMO-FLP-10102',
+        unitCode: 'FLP-D2',
+        lotId: 'DEMO-LOT-5104',
+        lotNo: 'DEMO-LOT-5104',
+        sellerId: 'DEMO-REG-FS-1004',
+        sellerLabel: 'WK-19',
+        commodityName: 'Ginger',
+        gradeName: 'A',
+        intakeUnits: toUnits(2),
+        note: 'Sample intake left short of a full grade. The gap is a discrepancy.',
+        at: '2026-11-14T09:10:00+05:30',
+      },
+    ],
+    grades: [
+      { id: 'DEMO-FLG-10101', batchId: 'DEMO-FLB-10101', kind: 'grade', label: 'A', quantityUnits: toUnits(2.4), at: '2026-11-14T09:20:00+05:30' },
+      { id: 'DEMO-FLG-10102', batchId: 'DEMO-FLB-10101', kind: 'grade', label: 'B', quantityUnits: toUnits(1.2), at: '2026-11-14T09:25:00+05:30' },
+      { id: 'DEMO-FLG-10103', batchId: 'DEMO-FLB-10101', kind: 'waste', label: 'Waste', quantityUnits: toUnits(0.4), at: '2026-11-14T09:30:00+05:30' },
+      { id: 'DEMO-FLG-10104', batchId: 'DEMO-FLB-10102', kind: 'grade', label: 'A', quantityUnits: toUnits(1.5), at: '2026-11-14T09:40:00+05:30' },
+    ],
+    packs: [
+      { id: 'DEMO-FLK-10101', batchId: 'DEMO-FLB-10101', gradeLabel: 'A', packCount: 24, quantityUnits: toUnits(2.4), at: '2026-11-14T10:00:00+05:30' },
+      { id: 'DEMO-FLK-10102', batchId: 'DEMO-FLB-10101', gradeLabel: 'B', packCount: 12, quantityUnits: toUnits(1.2), at: '2026-11-14T10:10:00+05:30' },
+    ],
+    outputs: [
+      {
+        id: 'DEMO-FLO-10101',
+        batchId: 'DEMO-FLB-10101',
+        outputNo: 'DEMO-FLO-10101',
+        quantityUnits: toUnits(3.6),
+        note: 'Sample output. Not a delivery note.',
+        at: '2026-11-14T11:00:00+05:30',
+      },
+    ],
+    moves: [
+      {
+        id: 'DEMO-FLM-10101',
+        moveNo: 'DEMO-FLM-10101',
+        kind: 'inward',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        batchId: 'DEMO-FLB-10101',
+        item: 'Produce intake',
+        quantityUnits: toUnits(4),
+        partyLabel: 'DG-14',
+        note: 'Linked to DEMO-LOT-5101. Not a gate pass.',
+        at: DAY,
+      },
+      {
+        id: 'DEMO-FLM-10102',
+        moveNo: 'DEMO-FLM-10102',
+        kind: 'outward',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        batchId: 'DEMO-FLB-10101',
+        item: 'Packed output',
+        quantityUnits: toUnits(3.6),
+        partyLabel: 'DG-14',
+        note: 'Linked to DEMO-FLO-10101. Not a delivery note.',
+        at: '2026-11-14T11:00:00+05:30',
+      },
+    ],
+    inspections: [
+      {
+        id: 'DEMO-FLC-10101',
+        kind: 'cleaning',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        items: [
+          { id: 'floor', label: 'Floors cleaned', result: 'yes' },
+          { id: 'waste', label: 'Waste removed', result: 'yes' },
+          { id: 'equipment', label: 'Equipment cleaned', result: 'yes' },
+        ],
+        note: 'All lines passed in the sample.',
+        at: '2026-11-14T07:30:00+05:30',
+      },
+    ],
+    maintenance: [
+      {
+        id: 'DEMO-FLN-10101',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        title: 'Belt noted',
+        status: 'open',
+        note: 'Sample log. No work order was sent.',
+        at: '2026-11-14T08:15:00+05:30',
+      },
+    ],
+    insurance: [
+      {
+        id: 'DEMO-FLI-10101',
+        policyNo: 'DEMO-FLI-10101',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        cover: 'Simulated cover for the chilli line.',
+        until: '2026-12-20',
+        note: 'Simulated cover. No insurer and no claim.',
+      },
+    ],
+    incidents: [
+      {
+        id: 'DEMO-FLX-10101',
+        unitId: 'DEMO-FLP-10101',
+        unitCode: 'FLP-D1',
+        title: 'Spill noted in the sample',
+        status: 'open',
+        note: 'Simulated report. No service was called.',
+        at: '2026-11-14T10:40:00+05:30',
+      },
+    ],
+    reports: [],
+    batchSeq: 10201,
+    gradeSeq: 10201,
+    packSeq: 10201,
+    outputSeq: 10201,
+    moveSeq: 10201,
+    inspectionSeq: 10201,
+    maintenanceSeq: 10201,
+    insuranceSeq: 10201,
+    incidentSeq: 10201,
+    reportSeq: 10201,
+  }
+}

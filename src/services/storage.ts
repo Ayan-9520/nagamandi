@@ -1,0 +1,17 @@
+export const storageKeys = {
+  ui: 'naga-mandi-os.ui',
+  demo: 'naga-mandi-os.demo',
+  session: 'naga-mandi-os.session',
+  registry: 'naga-mandi-os.registry',
+  licences: 'naga-mandi-os.licences',
+  arrivals: 'naga-mandi-os.arrivals',
+  trades: 'naga-mandi-os.trades',
+  finance: 'naga-mandi-os.finance',
+  warehouses: 'naga-mandi-os.warehouses',
+  coldStorage: 'naga-mandi-os.cold-storage',
+  flp: 'naga-mandi-os.flp',
+  parking: 'naga-mandi-os.parking',
+  facilities: 'naga-mandi-os.facilities',
+  compliance: 'naga-mandi-os.compliance',
+  field: 'naga-mandi-os.field',
+} as const
